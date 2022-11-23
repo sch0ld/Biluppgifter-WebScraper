@@ -22,7 +22,6 @@ if ($USEREALWEBSITE) {
     // Gets the HTTP Status Code from the headers and checks if it contains "429", if so, print an error message on our own that looks more legit. (Even tho it's the opposite haha)
     if (str_contains($responseHeaders[0], "429")) {
         $HTTPStatus = "429 Too Many Requests";
-        // echo "{ 'status': '429 Too Many Requests!' }";
     }
     // Assigns the $HTMLContent variable to HTML Data from the website to analyze using RegEx
     $HTMLContent = file_get_contents($BASEURL);
