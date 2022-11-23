@@ -6,11 +6,12 @@
  This API makes things easier with grabbing information about Swedish cars as a developer. The returned format is JSON, so it's very easy to grab that piece of information you're seaching for.
  Biluppgifter.se owns the data. If you need to use an API to get access to this, [Biluppgifter.se offers their own API that probably is so much better](https://biluppgifter.se/produkter)
  
- Warning! This does come with HTTPS Request Limits as Biluppgifter uses that. There are always ways to go around that, but I don't want to, so __respectfully, no. Don't__.
+ Warning! This does come with HTTPS Request Limits as Biluppgifter.se uses that. There are always ways to go around that, but I don't want to, so __respectfully, no. Don't__.
  
 
 
 ## Obtainable Information
+ - HTTP Status
  - Brand
  - Model
  - Model Year

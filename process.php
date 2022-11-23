@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(0);
+ini_set('display_errors', 0);
+
 // For debug only
 $USEREALWEBSITE = True;
 
@@ -7,7 +10,9 @@ $USEREALWEBSITE = True;
 $LICENSEPLATE = $_GET['reg'];
 
 // Creates a variable by joining the entered LP and a URL
-$BASEURL = "https://biluppgifter.se/fordon/" . $LICENSEPLATE;
+$BASEURL = "https://biluppgifter.se/fordon/" . $LICENSEPLATE; 
+
+$HTTPStatus = "200 OK";
 
 if ($USEREALWEBSITE) {
     // Gets the headers from the HTTP Request 
@@ -15,7 +20,8 @@ if ($USEREALWEBSITE) {
     
     // Gets the HTTP Status Code from the headers and checks if it contains "429", if so, print an error message on our own that looks more legit. (Even tho it's the opposite haha)
     if (str_contains($responseHeaders[0], "429")) {
-        echo "<h1>Too many Requests! Calm down and try again later</h1>";
+        $HTTPStatus = "429 Too Many Requests";
+        // echo "{ 'status': '429 Too Many Requests!' }";
     }
     // Assigns the $HTMLContent variable to HTML Data from the website to analyze using RegEx
     $HTMLContent = file_get_contents($BASEURL);
@@ -128,7 +134,6 @@ $color = str_replace("Färg", "", strip_tags($matches[0][0]));
 preg_match('/<span class="label">Kaross<\/span>\n.*/', $HTMLContent, $matches, PREG_OFFSET_CAPTURE);
 $chassi = str_replace("Kaross", "", strip_tags($matches[0][0]));
 
-
 // Total weight - The Total Weight of the vehicle | For example "2300kg"
 preg_match('/<span class="label">Totalvikt<\/span>\n.*/', $HTMLContent, $matches, PREG_OFFSET_CAPTURE);
 $totalWeight = str_replace("Totalvikt", "", strip_tags($matches[0][0]));
@@ -182,6 +187,7 @@ echo "<h3>Total Trailer Weight: " . $totalTrailerWeight . "</h3>";
 
 // Builds an array of the information
 $arr = array(
+'http_status' => $HTTPStatus,
 'brand' => $fabrikat,
 'model' => $modell,
 'owner' => $owner, 
@@ -216,8 +222,10 @@ $arr = array(
 
 // Removes the \n (newline) symbols in each value of the array
 foreach ($arr as $key => $value) {
-    $arr[$key] = str_replace("\n", "", $value);
+    $newValue = $arr[$key] = str_replace("\n", "", $value);
+    $arr[$key] = str_replace("\/", "", $newValue);
 }
+
 
 // Encodes the array as JSON
 echo json_encode($arr);
