@@ -1,6 +1,6 @@
 <?php
 
-// For debug only
+// For debug only - Leave it as True 
 $USEREALWEBSITE = True;
 
 // Gets the POST variable
