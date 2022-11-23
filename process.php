@@ -222,10 +222,4 @@ foreach ($arr as $key => $value) {
 // Encodes the array as JSON
 echo json_encode($arr);
 
-
-
-
-
-
-
 ?>
