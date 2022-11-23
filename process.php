@@ -179,6 +179,8 @@ echo "<h3>Total Weight: " . $totalWeight . "</h3>";
 echo "<h3>Total Trailer Weight: " . $totalTrailerWeight . "</h3>";
 
 */
+
+// Builds an array of the information
 $arr = array(
 'brand' => $fabrikat,
 'model' => $modell,
@@ -212,11 +214,12 @@ $arr = array(
 'notes' => 'I do NOT own the data. This is a webscraper just for fun. May be illegal to use. I am not responsible for what this is used for.'
 );
 
-
+// Removes the \n (newline) symbols in each value of the array
 foreach ($arr as $key => $value) {
     $arr[$key] = str_replace("\n", "", $value);
 }
 
+// Encodes the array as JSON
 echo json_encode($arr);
 
 
