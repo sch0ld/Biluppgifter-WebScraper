@@ -1,5 +1,6 @@
 <?php
 
+// For debug only - Leave it as True 
 error_reporting(0);
 ini_set('display_errors', 0);
 
@@ -229,11 +230,5 @@ foreach ($arr as $key => $value) {
 
 // Encodes the array as JSON
 echo json_encode($arr);
-
-
-
-
-
-
 
 ?>
